@@ -37,7 +37,7 @@ def scan():
         [devices, devices_mac,devices_name]
         ]
     table = AsciiTable(table_data)
-    print("[+]------------------Aginizda Bulunan Cihazlar ]----------------[+]\n")
+    print("[+]------------------[Aginizda Bulunan Cihazlar ]----------------[+]\n")
     print(table.table)
     
 		
