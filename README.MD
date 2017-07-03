@@ -1,6 +1,9 @@
 to start the program run new.py in python3
 
  programi başlatmak için new.py yi python3 de açınız.
+ 
+    python3 new.py
+ 
 program için terminaltables yüklü olmalıdır eğer yüklü değilse 
 
     pip3 install terminaltables 
