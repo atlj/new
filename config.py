@@ -54,7 +54,7 @@ def main():
 		listen = int(input(P+'config >> '+W))
 	except ValueError:
 		print(shell.textmain, R + "lutfen dogru bir deger giriniz." + W)
-		main()
+		shell()
 	if not listen:
 		print(shell.textmain, "lutfen figlet icin deger seciniz tek/coklu")
 		cc = input(P+'config >> '+W)
