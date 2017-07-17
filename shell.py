@@ -1,3 +1,4 @@
+from terminaltables import AsciiTable
 import os
 import rlcompleter
 import time
@@ -98,15 +99,6 @@ def shell():
 		  game.ana()
 		 
 		
-		elif 'help' in komut:
-		 try:
-		  komut = komut.split(" ")
-		  helper.arg=komut[1]
-		  helper.arg="".join(helper.arg)
-		  helper.main()
-		 except IndexError:
-		  print("yardim icerigi goruntulemek icin\nbir komut giriniz.\nornek: help ls")
-
 
 		elif komut == 'clear':
 			os.system("clear")
@@ -163,22 +155,28 @@ def shell():
 			print(text2.format(user.assistant, user.isim, hitap), textmerhaba.format(user.isim, hitap))
 		
 		elif komut == 'kullanici':
-			text5 = '\n\t Kullanici : {} {}\n\t Asistan ismi : {}\n\t'
-			print("kullanici bilgileri siralaniyor..\n\n", "\t", '=' * 25, text5.format(user.isim, hitap, user.assistant), "=" * 25, "\n")
+			table_data = [['Kulanici','Asistan','Yuklu komutlar'],
+			              [user.isim,user.assistant,len(charset)]]
+			table = AsciiTable(table_data)
+			print(table.table)
 	
 		elif komut == 'komutlar':
-			sayac = 0
-			text4 = 'kullanilabilir komutlar:\n\t ===================================\n\t '
-			for a in charset:
-				sayac = sayac + 1
-				text4 = text4 + a 
-				text4 = text4 + '  '
-				if sayac%4 == 0:
-					text4 = text4 + '\n\t '
-			print(__main__.G + text4 + __main__.B, "\n\t",G + '=' * 35 + B)
+		  komutaciklamalist=[]
+		  komutlist= '\n\n'.join(charset)
+		  for i in charset:
+		     komutaciklamalist.append(helper.main(i))
+		  komutaciklama='\n\n'.join(komutaciklamalist)
+		  
+		  
+		    
+		  tablo_verisi = [['Komut','Aciklama'],[komutlist,komutaciklama]]
+		  table = AsciiTable(tablo_verisi)
+		  print(table.table)
+			    
 		elif komut == 'saat':
 			zaman = time.ctime()
 			print("\n\n\t", '=' * 25,"\n\t", zaman, "\n\t", '=' * 25, "\n\n")
+
 
 		elif komut == 'credits':
 			print(G + """

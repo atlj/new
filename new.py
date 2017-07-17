@@ -4,6 +4,7 @@ import os
 import time
 import shell
 import sys
+from terminaltables import AsciiTable
 from configparser import SafeConfigParser
 
 
@@ -124,8 +125,13 @@ def main():
 	getassistantname(first_run)
 	saveload(first_run)
 	definehitap()
-	text5 = '\n\t Kullanici : {} {}\n\t Asistan ismi : {}\n\t'
-	print(W +"\n", "\t", '=' * 25, text5.format(user.isim, hitap, user.assistant), "=" * 25, "\n\n" + W)
+	table_data = [['Kulanici adi','Assistan'],
+	              [user.isim+hitap,user.assistant]]
+	table = AsciiTable(table_data)
+	print(G+table.table+W)
+	
+	
+	
 	yazi1 = 'Hos geldiniz {} {}'
 	print(user.assistant, ": ", yazi1.format(user.isim, hitap))
 	shell.shellinit()
