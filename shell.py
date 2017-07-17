@@ -13,13 +13,12 @@ import figlet
 import assistping
 import asistchatserver
 import asistchatclient
-import crypter
-import decrypter
 import config
 import mailconfig
 import asistanmail
 import helper
 import game
+import menu
 
 
 
@@ -59,8 +58,8 @@ def shellinit():
 	text2 = '{} :({} {})>> ' 
 	print(text2.format(user.assistant, user.isim, hitap)+W+ "merhaba!\nkullanilabilir komutlari goruntulemek icin "+P+"komutlar "+W+"yazin\nyardim icin "+C+"help \n"+W+"cikmak icin "+R+"cikis"+W+" yazin\nmenuyu goruntulemek icin "+G + "\"ctrl + c\""+ W+" tuslarina basin.")
 	
-charset = ['saat', 'komutlar', 'cikis', 'kullanici', 'sifirla', 'help', 'merhaba','2048', 'credits', 'version', 'hesap', 'clear','tara','androidpy','crypter','decrypter', 'bilgiler', 'figlet','internet', 'ls', 'exit','email','chatserver','chatclient', 'config', 'delconf', 'email', 'mailconfig']
-
+charset = ['gui','saat', 'komutlar', 'cikis', 'kullanici', 'sifirla', 'help', 'merhaba','2048', 'credits', 'version', 'hesap', 'clear','tara','androidpy','crypter','decrypter', 'bilgiler', 'figlet','internet', 'ls', 'exit','email','chatserver','chatclient', 'config', 'delconf', 'email', 'mailconfig']
+chb = ['komutlar', 'help', 'saat']
 #olayin koptugu yer, kullanicidan aldigi komutu kutuphanesinde bulunan komutlarla karsilastirarak geribildirim verir.
 def shell():
 	global ip
@@ -71,66 +70,73 @@ def shell():
 		global textmain
 		textmain = text2.format(user.assistant, user.isim, hitap)
 
+		if komut == "gui":
+		  komut =  charset[menu.create(charset)]
+		  os.system("clear")
+		  komut = "".join(komut)
+	
+	
 		if komut == 'figlet':
 		  figlet.main()
 		  
-		elif komut == "mailconfig":
+		if komut == "mailconfig":
 		  mailconfig.main()
-	
-		elif komut== 'chatserver':
+		  
+		  	
+		if komut== 'chatserver':
 			asistchatserver.uygulama()
 
-		elif komut== 'chatclient':
+		if komut== 'chatclient':
 			asistchatclient.uygulama()
 
-		elif komut == 'bilgiler':
+		if komut == 'bilgiler':
 			sysinfo.getos()
 
-		elif komut == 'iptest':
+		if komut == 'iptest':
 			print(ip)
 			
-		elif komut == 'crypter':
+		if komut == 'crypter':
 		  crypter.main()
 		  
-		elif komut == 'decrypter':
+		if komut == 'decrypter':
 		  decrypter.main()
 		
-		elif komut == '2048':
+		if komut == '2048':
 		  game.ana()
 		 
 		
 
-		elif komut == 'clear':
+		if komut == 'clear':
 			os.system("clear")
 
-		elif komut == 'hesap':
+		if komut == 'hesap':
 			calculator.main()
 		
-		elif komut == 'tara':
+		if komut == 'tara':
 			scannt.scan()
 	
-		elif komut == 'androidpy':
+		if komut == 'androidpy':
 			autopayload.autopystart()
 	  
-		elif komut == 'internet':
+		if komut == 'internet':
 			assistping.check_net()
 		
-		elif komut == 'email':
+		if komut == 'email':
 		  asistanmail.main()
 
-		elif komut == 'ls':
+		if komut == 'ls':
 			textdizin = input("lutfen goruntulemek istediginiz dizini giriniz ==> ")
 			textgoruntulenen = '{} dizini goruntuleniyor\n'
 			textls = 'ls {}'
 			print(textmain, textgoruntulenen.format(textdizin), os.popen(textls.format(textdizin)).read())
 
-		elif komut == 'version':
+		if komut == 'version':
 			print(textmain, "versiyon: ", __main__.version)
 	
-		elif komut == 'exit':
+		if komut == 'exit':
 			sys.exit()
 		
-		elif komut == 'delconf':
+		if komut == 'delconf':
 			if os.path.isfile(config.config_dir):
 				os.remove(config.config_dir)
 				print("DEBUG==config silindi.==DEBUG")
@@ -138,7 +144,7 @@ def shell():
 			else:
 				print("DEBUG==oyle bir dosya yok.==DEBUG")
 
-		elif komut == 'sifirla':
+		if komut == 'sifirla':
 			print(textmain, C + "sifirlama islemini gerceklestirmek icin \"ctrl + c\" tuslarina basin" + B)
 			try:
 				rand = input(">>")
@@ -150,17 +156,17 @@ def shell():
 				print("\n", textmain, G + "sifirlanma islemi tamamlandi." + B)
 				sys.exit()
 
-		elif komut == 'merhaba':
+		if komut == 'merhaba':
 			textmerhaba = 'size de merhaba {} {}'
 			print(text2.format(user.assistant, user.isim, hitap), textmerhaba.format(user.isim, hitap))
 		
-		elif komut == 'kullanici':
+		if komut == 'kullanici':
 			table_data = [['Kulanici','Asistan','Yuklu komutlar'],
 			              [user.isim,user.assistant,len(charset)]]
 			table = AsciiTable(table_data)
 			print(table.table)
 	
-		elif komut == 'komutlar':
+		if komut == 'komutlar':
 		  komutaciklamalist=[]
 		  komutlist= '\n\n'.join(charset)
 		  for i in charset:
@@ -173,12 +179,12 @@ def shell():
 		  table = AsciiTable(tablo_verisi)
 		  print(table.table)
 			    
-		elif komut == 'saat':
+		if komut == 'saat':
 			zaman = time.ctime()
 			print("\n\n\t", '=' * 25,"\n\t", zaman, "\n\t", '=' * 25, "\n\n")
 
 
-		elif komut == 'credits':
+		if komut == 'credits':
 			print(G + """
 	|===========================|
 	|Runtime And Shell Coded by:|
@@ -195,13 +201,11 @@ def shell():
 
 
 
-		elif komut == 'cikis':
+		if komut == 'cikis':
 			sys.exit()
 		
-		elif komut == 'config':
+		if komut == 'config':
 			config.runtime()
-		else:
-		 print("komut bulunamadi.")
 			
 		shell()
 	
