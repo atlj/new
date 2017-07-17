@@ -18,6 +18,7 @@ import config
 import mailconfig
 import asistanmail
 import helper
+import game
 
 
 
@@ -57,7 +58,7 @@ def shellinit():
 	text2 = '{} :({} {})>> ' 
 	print(text2.format(user.assistant, user.isim, hitap)+W+ "merhaba!\nkullanilabilir komutlari goruntulemek icin "+P+"komutlar "+W+"yazin\nyardim icin "+C+"help \n"+W+"cikmak icin "+R+"cikis"+W+" yazin\nmenuyu goruntulemek icin "+G + "\"ctrl + c\""+ W+" tuslarina basin.")
 	
-charset = ['saat', 'komutlar', 'cikis', 'kullanici', 'sifirla', 'help', 'merhaba', 'credits', 'version', 'hesap', 'clear','tara','androidpy','crypter','decrypter', 'bilgiler', 'figlet','internet', 'ls', 'exit','email','chatserver','chatclient', 'config', 'delconf', 'email', 'mailconfig']
+charset = ['saat', 'komutlar', 'cikis', 'kullanici', 'sifirla', 'help', 'merhaba','2048', 'credits', 'version', 'hesap', 'clear','tara','androidpy','crypter','decrypter', 'bilgiler', 'figlet','internet', 'ls', 'exit','email','chatserver','chatclient', 'config', 'delconf', 'email', 'mailconfig']
 
 #olayin koptugu yer, kullanicidan aldigi komutu kutuphanesinde bulunan komutlarla karsilastirarak geribildirim verir.
 def shell():
@@ -92,6 +93,9 @@ def shell():
 		  
 		elif komut == 'decrypter':
 		  decrypter.main()
+		
+		elif komut == '2048':
+		  game.ana()
 		 
 		
 		elif 'help' in komut:
