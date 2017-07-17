@@ -53,9 +53,9 @@ def shellinit():
 		hitap = 'hanim'
 	text1 = '==> '
 	text2 = '{} :({} {})>> ' 
-	print(text2.format(user.assistant, user.isim, hitap)+W+ "merhaba!\nkullanilabilir komutlari goruntulemek icin "+P+"komutlar "+W+"yazin\ncikmak icin "+R+"cikis"+W+" yazin\nmenuyu goruntulemek icin "+G + "\"ctrl + c\""+ W+" tuslarina basin.")
+	print(text2.format(user.assistant, user.isim, hitap)+W+ "merhaba!\nkullanilabilir komutlari goruntulemek icin "+P+"komutlar "+W+"yazin\nyardim icin "+C+"help \n"+W+"cikmak icin "+R+"cikis"+W+" yazin\nmenuyu goruntulemek icin "+G + "\"ctrl + c\""+ W+" tuslarina basin.")
 	
-charset = ['saat', 'komutlar', 'cikis', 'kullanici', 'sifirla', 'merhaba', 'credits', 'version', 'hesap', 'clear','tara','androidpy', 'bilgiler', 'figlet','internet', 'ls', 'exit','email','chatserver','chatclient', 'config', 'delconf', 'mailconfig']
+charset = ['saat', 'komutlar', 'cikis', 'kullanici', 'sifirla', 'help', 'merhaba', 'credits', 'version', 'hesap', 'clear','tara','androidpy', 'bilgiler', 'figlet','internet', 'ls', 'exit','email','chatserver','chatclient', 'config', 'delconf', 'email', 'mailconfig']
 
 #olayin koptugu yer, kullanicidan aldigi komutu kutuphanesinde bulunan komutlarla karsilastirarak geribildirim verir.
 def shell():
@@ -70,22 +70,22 @@ def shell():
 		if komut == 'figlet':
 		  figlet.main()
 		  
-		if komut == "mailconfig":
+		elif komut == "mailconfig":
 		  mailconfig.main()
 	
-		if komut== 'chatserver':
+		elif komut== 'chatserver':
 			asistchatserver.uygulama()
 
-		if komut== 'chatclient':
+		elif komut== 'chatclient':
 			asistchatclient.uygulama()
 
-		if komut == 'bilgiler':
+		elif komut == 'bilgiler':
 			sysinfo.getos()
 
-		if komut == 'iptest':
+		elif komut == 'iptest':
 			print(ip)
 			
-		if 'help' in komut:
+		elif 'help' in komut:
 		 try:
 		  komut = komut.split(" ")
 		  helper.arg=komut[1]
@@ -95,37 +95,37 @@ def shell():
 		  print("yardim icerigi goruntulemek icin\nbir komut giriniz.\nornek: help ls")
 
 
-		if komut == 'clear':
+		elif komut == 'clear':
 			os.system("clear")
 
-		if komut == 'hesap':
+		elif komut == 'hesap':
 			calculator.main()
 		
-		if komut == 'tara':
+		elif komut == 'tara':
 			scannt.scan()
 	
-		if komut == 'androidpy':
+		elif komut == 'androidpy':
 			autopayload.autopystart()
 	  
-		if komut == 'internet':
+		elif komut == 'internet':
 			assistping.check_net()
 		
-		if komut == 'email':
+		elif komut == 'email':
 		  asistanmail.main()
 
-		if komut == 'ls':
+		elif komut == 'ls':
 			textdizin = input("lutfen goruntulemek istediginiz dizini giriniz ==> ")
 			textgoruntulenen = '{} dizini goruntuleniyor\n'
 			textls = 'ls {}'
 			print(textmain, textgoruntulenen.format(textdizin), os.popen(textls.format(textdizin)).read())
 
-		if komut == 'version':
+		elif komut == 'version':
 			print(textmain, "versiyon: ", __main__.version)
 	
-		if komut == 'exit':
+		elif komut == 'exit':
 			sys.exit()
 		
-		if komut == 'delconf':
+		elif komut == 'delconf':
 			if os.path.isfile(config.config_dir):
 				os.remove(config.config_dir)
 				print("DEBUG==config silindi.==DEBUG")
@@ -133,7 +133,7 @@ def shell():
 			else:
 				print("DEBUG==oyle bir dosya yok.==DEBUG")
 
-		if komut == 'sifirla':
+		elif komut == 'sifirla':
 			print(textmain, C + "sifirlama islemini gerceklestirmek icin \"ctrl + c\" tuslarina basin" + B)
 			try:
 				rand = input(">>")
@@ -145,15 +145,15 @@ def shell():
 				print("\n", textmain, G + "sifirlanma islemi tamamlandi." + B)
 				sys.exit()
 
-		if komut == 'merhaba':
+		elif komut == 'merhaba':
 			textmerhaba = 'size de merhaba {} {}'
 			print(text2.format(user.assistant, user.isim, hitap), textmerhaba.format(user.isim, hitap))
 		
-		if komut == 'kullanici':
+		elif komut == 'kullanici':
 			text5 = '\n\t Kullanici : {} {}\n\t Asistan ismi : {}\n\t'
 			print("kullanici bilgileri siralaniyor..\n\n", "\t", '=' * 25, text5.format(user.isim, hitap, user.assistant), "=" * 25, "\n")
 	
-		if komut == 'komutlar':
+		elif komut == 'komutlar':
 			sayac = 0
 			text4 = 'kullanilabilir komutlar:\n\t ===================================\n\t '
 			for a in charset:
@@ -163,11 +163,11 @@ def shell():
 				if sayac%4 == 0:
 					text4 = text4 + '\n\t '
 			print(__main__.G + text4 + __main__.B, "\n\t",G + '=' * 35 + B)
-		if komut == 'saat':
+		elif komut == 'saat':
 			zaman = time.ctime()
 			print("\n\n\t", '=' * 25,"\n\t", zaman, "\n\t", '=' * 25, "\n\n")
 
-		if komut == 'credits':
+		elif komut == 'credits':
 			print(G + """
 	|===========================|
 	|Runtime And Shell Coded by:|
@@ -184,12 +184,14 @@ def shell():
 
 
 
-		if komut == 'cikis':
+		elif komut == 'cikis':
 			sys.exit()
 		
-		if komut == 'config':
+		elif komut == 'config':
 			config.runtime()
-	
+		else:
+		 print("komut bulunamadi.")
+			
 		shell()
 	
 	except KeyboardInterrupt:
