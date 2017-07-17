@@ -13,6 +13,9 @@ import assistping
 import asistchatserver
 import asistchatclient
 import config
+import mailconfig
+import asistanmail
+
 
 
 
@@ -51,7 +54,7 @@ def shellinit():
 	text2 = '{} :({} {})>> ' 
 	print(text2.format(user.assistant, user.isim, hitap)+W+ "merhaba!\nkullanilabilir komutlari goruntulemek icin "+P+"komutlar "+W+"yazin\ncikmak icin "+R+"cikis"+W+" yazin\nmenuyu goruntulemek icin "+G + "\"ctrl + c\""+ W+" tuslarina basin.")
 	
-charset = ['saat', 'komutlar', 'cikis', 'kullanici', 'sifirla', 'merhaba', 'credits', 'version', 'hesap', 'clear','tara','androidpy', 'bilgiler', 'figlet','internet', 'ls', 'exit','chatserver','chatclient', 'config', 'delconf']
+charset = ['saat', 'komutlar', 'cikis', 'kullanici', 'sifirla', 'merhaba', 'credits', 'version', 'hesap', 'clear','tara','androidpy', 'bilgiler', 'figlet','internet', 'ls', 'exit','email','chatserver','chatclient', 'config', 'delconf', 'mailconfig']
 
 #olayin koptugu yer, kullanicidan aldigi komutu kutuphanesinde bulunan komutlarla karsilastirarak geribildirim verir.
 def shell():
@@ -65,6 +68,9 @@ def shell():
 
 		if komut == 'figlet':
 		  figlet.main()
+		  
+		if komut == "mailconfig":
+		  mailconfig.main()
 	
 		if komut== 'chatserver':
 			asistchatserver.uygulama()
@@ -92,6 +98,9 @@ def shell():
 	  
 		if komut == 'internet':
 			assistping.check_net()
+		
+		if komut == 'email':
+		  asistanmail.main()
 
 		if komut == 'ls':
 			textdizin = input("lutfen goruntulemek istediginiz dizini giriniz ==> ")
