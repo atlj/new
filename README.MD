@@ -4,9 +4,9 @@ to start the program run new.py in python3
  
     python3 new.py
  
-program için terminaltables yüklü olmalıdır eğer yüklü değilse 
+program için terminaltables Ve pyaes yüklü olmalıdır eğer yüklü değilse 
 
-    pip3 install terminaltables 
+    pip3 install -r request.txt
 
 aracılığıyla yükleyebilirsiniz eğer pip3 de yüklü değilse 
 
