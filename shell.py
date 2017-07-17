@@ -15,6 +15,7 @@ import asistchatclient
 import config
 import mailconfig
 import asistanmail
+import helper
 
 
 
@@ -83,6 +84,16 @@ def shell():
 
 		if komut == 'iptest':
 			print(ip)
+			
+		if 'help' in komut:
+		 try:
+		  komut = komut.split(" ")
+		  helper.arg=komut[1]
+		  helper.arg="".join(helper.arg)
+		  helper.main()
+		 except IndexError:
+		  print("yardim icerigi goruntulemek icin\nbir komut giriniz.\nornek: help ls")
+
 
 		if komut == 'clear':
 			os.system("clear")
