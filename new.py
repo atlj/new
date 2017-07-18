@@ -6,7 +6,7 @@ import shell
 import sys
 from terminaltables import AsciiTable
 from configparser import SafeConfigParser
-
+import form
 
 config = SafeConfigParser()
 directory = os.path.dirname(os.path.realpath(__file__))
@@ -43,14 +43,11 @@ def check_if_first_run():
 	else:
 		first_run = 1
 
-#kullanıcı ismi sorar
-def getname(first_run):
-	if first_run:
-		print(P + "\nconfig.ini dosyasi tespit edilemedi yeni kullanici kaydi baslatiliyor.\n" + W)
-		user.isim = str(input("isminiz?\n>> "))
-		if not user.isim:
-			print(R +"Lutfen isim yerini bos birakmayiniz."+W)
-			getname(first_run)
+def getform():
+
+    if first_run:
+        user.isim, user.assistant = form.create()
+        os.system("clear")
 #cinsiyet sorar
 def getgender(first_run):
 	global hitap
@@ -75,13 +72,6 @@ def definehitap():
 	if user.gendr == "k":
 		hitap = 'hanim'	
 
-#asistanin ismini sorar
-def getassistantname(first_run):
-	if first_run:
-		user.assistant = str(input("Beni ne olarak cagimak istersiniz ?\n>> "))
-		if not user.assistant or user.assistant == ' ':
-			print(R+"Lutfen bana bir isim koyun."+W)
-			getassistantname(first_run)
 		
 #config dosyasını eger ilk acilissa yazar degilse yukleme yapar
 def saveload(first_run):
@@ -120,9 +110,8 @@ def saveload(first_run):
 	
 def main():
 	check_if_first_run()
-	getname(first_run)  
+	getform()
 	getgender(first_run)
-	getassistantname(first_run)
 	saveload(first_run)
 	definehitap()
 	table_data = [['Kulanici adi','Assistan'],
