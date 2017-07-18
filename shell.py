@@ -58,7 +58,7 @@ def shellinit():
 	text2 = '{} :({} {})>> ' 
 	print(text2.format(user.assistant, user.isim, hitap)+W+ "merhaba!\nkullanilabilir komutlari goruntulemek icin "+P+"komutlar "+W+"yazin\nyardim icin "+C+"help \n"+W+"cikmak icin "+R+"cikis"+W+" yazin\nmenuyu goruntulemek icin "+G + "\"ctrl + c\""+ W+" tuslarina basin.")
 	
-charset = ['gui','saat', 'komutlar', 'cikis', 'kullanici', 'sifirla', 'help', 'merhaba','2048', 'credits', 'version', 'hesap', 'clear','tara','androidpy','crypter','decrypter', 'bilgiler', 'figlet','internet', 'ls', 'exit','email','chatserver','chatclient', 'config', 'delconf', 'email', 'mailconfig']
+charset = ['gui','menu', 'saat', 'komutlar', 'cikis', 'kullanici', 'sifirla', 'help', 'merhaba','2048', 'credits', 'version', 'hesap', 'clear','tara','androidpy','crypter','decrypter', 'bilgiler', 'figlet','internet', 'ls', 'exit','email','chatserver','chatclient', 'config', 'delconf', 'email', 'mailconfig']
 chb = ['komutlar', 'help', 'saat']
 #olayin koptugu yer, kullanicidan aldigi komutu kutuphanesinde bulunan komutlarla karsilastirarak geribildirim verir.
 def shell():
@@ -74,6 +74,14 @@ def shell():
 		  komut =  charset[menu.create(charset)]
 		  os.system("clear")
 		  komut = "".join(komut)
+		  
+		if komut =="menu":
+		  items = ["Cikis Yap", "Shell'e Don"]
+		  sonuc = menu.create(items)
+		  if sonuc == 0:
+		    sys.exit()
+		  if sonuc == 1:
+		    pass
 	
 	
 		if komut == 'figlet':
@@ -145,16 +153,16 @@ def shell():
 				print("DEBUG==oyle bir dosya yok.==DEBUG")
 
 		if komut == 'sifirla':
-			print(textmain, C + "sifirlama islemini gerceklestirmek icin \"ctrl + c\" tuslarina basin" + B)
-			try:
-				rand = input(">>")
-				print(textmain, R + "sifirlama islemi iptal edildi" + B)
-				shell()
-			except KeyboardInterrupt:	
-				os.remove(__main__.config_dir)
-				os.remove(config.config_dir)
-				print("\n", textmain, G + "sifirlanma islemi tamamlandi." + B)
-				sys.exit()
+			print("sifirlama islemi icin (y) tusuna basin.")
+			if input(">>") == "y":
+			  sifir = ["Sifirla", "Iptal Et"]
+			  donut = menu.create(sifir)
+			  if donut == 0:
+			    os.remove(__main__.config_dir)
+			    print("basariyla sifirlandi.")
+			    sys.exit()
+			  else:
+			    pass
 
 		if komut == 'merhaba':
 			textmerhaba = 'size de merhaba {} {}'
@@ -210,18 +218,12 @@ def shell():
 		shell()
 	
 	except KeyboardInterrupt:
-		print(R + """
-Klavye tarafindan kesinti algilandi lutfen bir islem secin:
-shell'e don(kayit sirasinda kullanilamaz)	(0)
-uygulamadan cik					(1)""" + B)
-		try:
-			back = int(input(">> "))
-			if back:
-				sys.exit()
-			elif not back:
-				shell()
-		except ValueError:
-			print("hatali bir komut girildi uygulama tekrar baslatiliyor")
-			__main__.main()
+	  items = ["Cikis Yap", "Shell'e Don"]
+	  sonuc = menu.create(items)
+	  if sonuc == 0:
+	    sys.exit()
+	  if sonuc == 1:
+	    shell()
+
 
 	
