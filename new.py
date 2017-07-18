@@ -45,10 +45,14 @@ def check_if_first_run():
 		first_run = 1
 
 def getform():
-
     if first_run:
-        user.isim, user.assistant = form.create()
-        os.system("clear")
+        try:
+            forlist = ["Adiniz:", "Asistan Adi:"]
+            namelist = form.create("KURULUM", forlist)
+            user.isim = namelist[0]
+            user.assist=namelist[1]
+        except Exception as e:
+            getform()
 #cinsiyet sorar
 def getgender(first_run):
 	global hitap
@@ -91,16 +95,24 @@ def saveload(first_run):
 
 	config.read(config_dir)
 	if first_run:
-		rawip = os.popen("hostname -I").read()
-		rawip = rawip.split("\n")
-		localip = rawip[0]
-		config.add_section('user')
-		config.set('user', 'ip', localip)
-		config.set('user', 'username', user.isim)
-		config.set('user', 'gendr', user.gendr)
-		config.set('user', 'assist', user.assistant)
-		dosya = open(config_dir, 'w')
-		config.write(dosya)
+	 try:
+	  ip = os.popen("ifconfig | grep inet").read()
+	  ip = ip.split("\n")
+	  ip = ip[3]
+	  ip = ip.split("addr:")
+	  ip = ip[1]
+	  ip = ip.split(" ")
+	  ip = ip[0]
+	  localip = "".join(ip)
+	 except Exception as e:
+	  pass
+	 config.add_section('user')
+	 config.set('user', 'ip', localip)
+	 config.set('user', 'username', user.isim)
+	 config.set('user', 'gendr', user.gendr)
+	 config.set('user', 'assist', user.assistant)
+	 dosya = open(config_dir, 'w')
+	 config.write(dosya)
 	config.read(config_dir)
 	localip = config.get('user', 'ip')
 	user.isim = config.get('user', 'username')
