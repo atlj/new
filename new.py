@@ -7,6 +7,7 @@ import sys
 from terminaltables import AsciiTable
 from configparser import SafeConfigParser
 import form
+import menu
 
 config = SafeConfigParser()
 directory = os.path.dirname(os.path.realpath(__file__))
@@ -52,17 +53,13 @@ def getform():
 def getgender(first_run):
 	global hitap
 	if first_run:
-		user.gendr = str(input("cinsiyetiniz (e/k)\n>> ")).lower()
-			
-		if user.gendr == "e": 
-			hitap = 'bey'
-			
-		elif user.gendr == "k":
-			hitap = 'hanim'
-
-		else:
-			print(R+"Lutfen cinsiyet giriniz"+W)
-			getgender(first_run)
+	 gendr = ["Kadin", "Erkek"]
+	 sonc = menu.create(gendr)
+	 if sonc == 0:
+	  user.gendr ="k"
+	 if sonc == 1:
+	  user.gendr = "e"
+		
 
 #cinsiyete göre bey ya da hanim olarak hitap degiskenini atar
 def definehitap():
@@ -79,11 +76,18 @@ def saveload(first_run):
 	global version
 	global localip
 	version = """
-  ___  _____ 
- / _ \|___  |
-| | | |  / / 
-| |_| | / /  
- \___(_)_/   """
+   _                    _          
+  / /\                / /\         
+ / /  \              / /  \        
+/_/ /\ \            / / /\ \       
+\_\/\ \ \          / / /\ \ \      
+     \ \ \        /_/ /  \ \ \     
+      \ \ \       \ \ \   \ \ \    
+       \ \ \       \ \ \   \ \ \   
+      __\ \ \___  _ \ \ \___\ \ \  
+     /___\_\/__/\/\_\\ \/____\ \ \ 
+     \_________\/\/_/ \_________\/ 
+                                   """
 
 	config.read(config_dir)
 	if first_run:
@@ -111,11 +115,14 @@ def saveload(first_run):
 def main():
 	check_if_first_run()
 	getform()
+	if first_run:
+	 print("\n\n\tlutfen bir sonraki sayfada\n\tcinsiyetinizi belirtiniz\n\tdevam etmek icin bir tusa basin.")
+	 input("")
 	getgender(first_run)
 	saveload(first_run)
 	definehitap()
 	table_data = [['Kulanici adi','Assistan'],
-	              [user.isim+hitap,user.assistant]]
+	              [user.isim+' '+hitap,user.assistant]]
 	table = AsciiTable(table_data)
 	print(G+table.table+W)
 	
